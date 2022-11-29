@@ -6,16 +6,14 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 load_dotenv()
+DOCUMENT_ID = os.getenv("GOOGLE_SHEET_ID", default="OOPS")
+SHEET_NAME = os.getenv("SHEET_NAME", default="Responses")
+
 
 #Defining essential lists and functions
 clubList = ["Abigail", "Sign of the Whale", "Tokyo Pearl", "Ultrabar", "Decades"]
 yearList = ["Freshman", "Sophomore", "Junior", "Senior"]
 entries = []
-
-def addEntry (entry):
-    if (len(entry) != 2):
-        raise Exception("Incorrect entry syntax in addEntry")
-    entries.append({"club": entry[0], "year": entry[1]})
 
 def generateEntries(length):
     x = 0
@@ -25,11 +23,7 @@ def generateEntries(length):
         addEntry([club, year])
         x += 1
 
-#Working with Google Sheets
 def authorizeGoogleSheets():
-    DOCUMENT_ID = os.getenv("GOOGLE_SHEET_ID", default="OOPS")
-    SHEET_NAME = os.getenv("SHEET_NAME", default="Responses")
-
     CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "auth", "google-credentials.json")
 
     AUTH_SCOPE = [
@@ -38,33 +32,40 @@ def authorizeGoogleSheets():
     ]
 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
-    print("CREDS:", type(credentials)) #> <class 'oauth2client.service_account.ServiceAccountCredentials'>
-
     client = gspread.authorize(credentials)
-    print("CLIENT:", type(client)) #> <class 'gspread.client.Client'>
+    return client
 
-    print("-----------------")
-    print("READING DOCUMENT...")
-
+def readEntries():
     # access the document:
+    client = authorizeGoogleSheets()
     doc = client.open_by_key(DOCUMENT_ID)
-    print("DOC:", type(doc), doc.title) #> <class 'gspread.models.Spreadsheet'>
 
     # access a sheet within the document:
     sheet = doc.worksheet(SHEET_NAME)
-    print("SHEET:", type(sheet), sheet.title)#> <class 'gspread.models.Worksheet'>
 
     # fetch all data from that sheet:
     rows = sheet.get_all_records()
-    print("ROWS:", type(rows)) #> <class 'list'>
+    return rows
 
-    # loop through and print each row, one at a time:
-    for row in rows:
-        print(row) #> <class 'dict'>
+def addEntry(entry) :
+    if (len(entry) != 2):
+        raise Exception("Incorrect entry syntax in addEntry")
+
+    client = authorizeGoogleSheets()
+    doc = client.open_by_key(DOCUMENT_ID)
+    sheet = doc.worksheet(SHEET_NAME)
+    rows = sheet.get_all_records()
+    newRow = {"Club": entry[0], "Year": entry[1]}
+
+    new_values = list(newRow.values())
+
+    next_row_number = len(rows) + 2
+
+    response = sheet.insert_row(new_values, next_row_number)
 
 if __name__ == "__main__":
-    generateEntries(50)
-    authorizeGoogleSheets()
+    #generateEntries(50)
+    addEntry(["Sign of the Whale", "Junior"])
 
     #Generating output graphics
     clubFrequency = [0, 0, 0, 0, 0]
@@ -81,4 +82,4 @@ if __name__ == "__main__":
                 clubFrequency[idx] = clubFrequency[idx] + 1
 
     fig = px.bar(x=clubList, y=clubFrequency, labels={"y": "Frequency", "x": "Club"})
-    fig.show()
+    #fig.show()
