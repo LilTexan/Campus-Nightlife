@@ -7,6 +7,25 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 load_dotenv()
 
+#Defining essential lists and functions
+clubList = ["Abigail", "Sign of the Whale", "Tokyo Pearl", "Ultrabar", "Decades"]
+yearList = ["Freshman", "Sophomore", "Junior", "Senior"]
+entries = []
+
+def addEntry (entry):
+    if (len(entry) != 2):
+        raise Exception("Incorrect entry syntax in addEntry")
+    entries.append({"club": entry[0], "year": entry[1]})
+
+def generateEntries(length):
+    x = 0
+    while x < length:
+        club = random.choice(clubList)
+        year = random.choice(yearList)
+        addEntry([club, year])
+        x += 1
+
+#Working with Google Sheets
 def authorizeGoogleSheets():
     DOCUMENT_ID = os.getenv("GOOGLE_SHEET_ID", default="OOPS")
     SHEET_NAME = os.getenv("SHEET_NAME", default="Responses")
@@ -42,25 +61,6 @@ def authorizeGoogleSheets():
     # loop through and print each row, one at a time:
     for row in rows:
         print(row) #> <class 'dict'>
-
-#Defining essential lists and functions
-clubList = ["Abigail", "Sign of the Whale", "Tokyo Pearl", "Ultrabar", "Decades"]
-yearList = ["Freshman", "Sophomore", "Junior", "Senior"]
-entries = []
-
-def addEntry (entry):
-    if (len(entry) != 2):
-        raise Exception("Incorrect entry syntax in addEntry")
-    entries.append({"club": entry[0], "year": entry[1]})
-
-def generateEntries(length):
-    x = 0
-    while x < length:
-        club = random.choice(clubList)
-        year = random.choice(yearList)
-        addEntry([club, year])
-        x += 1
-
 
 if __name__ == "__main__":
     generateEntries(50)

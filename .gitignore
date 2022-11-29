@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # ignore the google api credentials file at the following location:
-auth/google-credentials.json
+app/auth/google-credentials.json
