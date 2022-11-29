@@ -63,9 +63,11 @@ def addEntry(entry) :
 
     response = sheet.insert_row(new_values, next_row_number)
 
+#def generateChartData():
+
+
 if __name__ == "__main__":
-    #generateEntries(50)
-    addEntry(["Sign of the Whale", "Junior"])
+    #generateEntries(10)
 
     #Generating output graphics
     clubFrequency = [0, 0, 0, 0, 0]
