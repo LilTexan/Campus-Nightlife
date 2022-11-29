@@ -1,0 +1,11 @@
+#REQUIREMENTS FILE
+
+python-dotenv
+
+plotly
+
+gspread
+
+pandas
+
+oauth2client
