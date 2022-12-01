@@ -3,7 +3,7 @@
 
 from flask import Blueprint, request, render_template, redirect, flash
 
-from app.entries import readEntries, addEntry, countFrequencies
+from app.entries import readEntries, addEntry, countFrequencies, returnClubs, returnYears
 
 nightlife_routes = Blueprint("nightlife_routes", __name__)
 
@@ -36,11 +36,15 @@ def dashboard():
 
         entries = readEntries()
         frequencies = countFrequencies(entries)
+        clubList = returnClubs()
+        yearList = returnYears()
 
         #flash("Fetched Real-time Market Data!", "success")
         return render_template("dashboard.html",
-            entries=entries
-            frequencies=frequencies
+            entries=entries,
+            frequencies=frequencies,
+            clubList=clubList,
+            yearList=yearList
         )
     except Exception as err:
         print('OOPS', err)
