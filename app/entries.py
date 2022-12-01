@@ -63,7 +63,15 @@ def addEntry(entry) :
 
     response = sheet.insert_row(new_values, next_row_number)
 
-#def generateChartData():
+def countFrequencies(entries):
+    clubFrequency = []
+    for (x=0; x < len(entries); x++):
+        clubFrequency.append(0)
+
+    for entry in entries:
+        idx = clubList.index(entry["club"])
+        clubFrequency[idx] = clubFrequency[idx] + 1
+    return clubFrequency
 
 
 if __name__ == "__main__":
