@@ -3,9 +3,7 @@
 
 {% block content %}
 
-    <h2>Georgetown's Going Out Dashboard</h2>
-
-    <p class="lead">Summarized Data:</p>
+    <h2>Going Out Dashboard</h2>
 
     <div id="chart-container" height="700px"></div>
 
@@ -16,11 +14,12 @@
 
         // use data from the router!
         //var entries = '{{ entries }}'
-        var frequencies = '{{ frequencies }}'
-        var clubList = '{{ clubList }}'
-        var yearList = '{{ yearList }}'
+        var frequencies = JSON.parse('{{ frequencies | tojson }}')
+        var clubList = JSON.parse('{{ clubList | tojson }}')
+        var yearList = JSON.parse('{{ yearList | tojson }}')
         console.log(clubList)
         console.log(frequencies)
+        console.log(yearList)
         //var stockData = JSON.parse('{{ data }}')
         //var stockData = '{{ data }}'
         //var data = JSON.parse('{{entries | tojson}}') // https://stackoverflow.com/a/45132694/670433
@@ -42,7 +41,7 @@
           }
         var chartData = [series]
         var layout = {
-            title: "Georgetown's Moves: ",
+            title: "Summarized Data: ",
             height: 600
         }
         //Plotly.newPlot("chart-container", data, layout, {responsive: true})

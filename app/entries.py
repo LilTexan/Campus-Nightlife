@@ -80,3 +80,6 @@ def returnClubs():
 
 def returnYears():
     return yearList
+
+if __name__ == "__main__":
+    generateEntries(100)
