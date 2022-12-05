@@ -40,12 +40,11 @@
         https://getbootstrap.com/docs/5.0/components/navbar/
     -->
     {% set nav_links = [
-        ('/about', 'about', 'About'),
-        ('/hello', 'hello', 'Hello'),
-        ('/form', 'form', 'Form'),
+        ('/home', 'home', 'Home'),
+        ('/form', 'form', 'Form')
     ] -%}
     {% set active_page = active_page|default('home') -%}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #041e42;">
         <div class="container-fluid">
             <!--a class="navbar-brand" href="/">My Web App</a-->
             <a class="navbar-brand" href="/">
@@ -53,7 +52,7 @@
                     ICONS
                     https://icons.getbootstrap.com/
                 -->
-                <i class="bi-globe" style="font-size: 1.7rem; color: white;"></i>
+                <i class="bi bi-cup-straw" style="font-size: 1.7rem; color: white;"></i>
                 &nbsp;
                 Georgetown Nightlife!
             </a>

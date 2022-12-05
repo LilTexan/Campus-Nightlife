@@ -7,6 +7,13 @@ from app.entries import readEntries, addEntry, countFrequencies, returnClubs, re
 
 nightlife_routes = Blueprint("nightlife_routes", __name__)
 
+@nightlife_routes.route("/")
+@nightlife_routes.route("/home")
+def index():
+    print("HOME...")
+    #return "Welcome Home"
+    return render_template("home.html")
+
 @nightlife_routes.route("/form")
 def form():
     print("NIGHTLIFE FORM...")
