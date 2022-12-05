@@ -43,6 +43,10 @@ def dashboard():
 
         entries = readEntries()
         frequencies = countFrequencies(entries)
+        freshmanFrequencies = countFrequencies(entries, "Freshman")
+        sophomoreFrequencies = countFrequencies(entries, "Sophomore")
+        juniorFrequencies = countFrequencies(entries, "Junior")
+        seniorFrequencies = countFrequencies(entries, "Senior")
         clubList = returnClubs()
         yearList = returnYears()
 
@@ -50,6 +54,10 @@ def dashboard():
         return render_template("dashboard.html",
             entries=entries,
             frequencies=frequencies,
+            freshmanFrequencies=freshmanFrequencies,
+            sophomoreFrequencies=sophomoreFrequencies,
+            juniorFrequencies=juniorFrequencies,
+            seniorFrequencies=seniorFrequencies,
             clubList=clubList,
             yearList=yearList
         )

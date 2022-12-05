@@ -63,16 +63,24 @@ def addEntry(entry) :
 
     response = sheet.insert_row(new_values, next_row_number)
 
-def countFrequencies(entries):
+def countFrequencies(entries, outputYear="ALL"):
     clubFrequency = []
     x = 0
     while x < len(clubList):
         clubFrequency.append(0)
         x += 1
 
-    for entry in entries:
-        idx = clubList.index(entry["Club"])
-        clubFrequency[idx] = clubFrequency[idx] + 1
+    if (outputYear == "ALL"):
+        for entry in entries:
+            idx = clubList.index(entry["Club"])
+            clubFrequency[idx] = clubFrequency[idx] + 1
+
+    else:
+        for entry in entries:
+            if (entry["Year"] == outputYear):
+                idx = clubList.index(entry["Club"])
+                clubFrequency[idx] = clubFrequency[idx] + 1
+
     return clubFrequency
 
 def returnClubs():

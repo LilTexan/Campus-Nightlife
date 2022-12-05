@@ -17,9 +17,10 @@
         var frequencies = JSON.parse('{{ frequencies | tojson }}')
         var clubList = JSON.parse('{{ clubList | tojson }}')
         var yearList = JSON.parse('{{ yearList | tojson }}')
-        console.log(clubList)
-        console.log(frequencies)
-        console.log(yearList)
+        var freshmanFrequencies = JSON.parse('{{ freshmanFrequencies | tojson }}')
+        var sophomoreFrequencies = JSON.parse('{{ sophomoreFrequencies | tojson }}')
+        var juniorFrequencies = JSON.parse('{{ juniorFrequencies | tojson }}')
+        var seniorFrequencies = JSON.parse('{{ seniorFrequencies | tojson }}')
         //var stockData = JSON.parse('{{ data }}')
         //var stockData = '{{ data }}'
         //var data = JSON.parse('{{entries | tojson}}') // https://stackoverflow.com/a/45132694/670433
@@ -33,16 +34,35 @@
 
         // visualize the data
         // see: https://plotly.com/javascript/line-charts/
-        var series =
-          {
-              x: clubList,
-              y: frequencies,
-              type: 'bar'
-          }
-        var chartData = [series]
+        var series1 = {
+            x: clubList,
+            y: freshmanFrequencies,
+            type: 'bar',
+            name: 'Freshmen'
+        }
+        var series2 = {
+          x: clubList,
+          y: sophomoreFrequencies,
+          type: 'bar',
+          name: 'Sophomores'
+        }
+        var series3 = {
+          x: clubList,
+          y: juniorFrequencies,
+          type: 'bar',
+          name: 'Juniors'
+        }
+        var series4 = {
+          x: clubList,
+          y: seniorFrequencies,
+          type: 'bar',
+          name: 'Seniors'
+        }
+        var chartData = [series1, series2, series3, series4]
         var layout = {
             title: "Summarized Data: ",
-            height: 600
+            height: 600,
+            barmode: 'stack'
         }
         //Plotly.newPlot("chart-container", data, layout, {responsive: true})
         Plotly.newPlot("chart-container", chartData, layout)
