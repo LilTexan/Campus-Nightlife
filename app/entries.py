@@ -13,7 +13,6 @@ SHEET_NAME = os.getenv("SHEET_NAME", default="Responses")
 #Defining essential lists and functions
 clubList = ["Abigail", "Sign of the Whale", "Tokyo Pearl", "Ultrabar", "Decades"]
 yearList = ["Freshman", "Sophomore", "Junior", "Senior"]
-entries = []
 
 def generateEntries(length):
     x = 0
@@ -63,23 +62,20 @@ def addEntry(entry) :
 
     response = sheet.insert_row(new_values, next_row_number)
 
-if __name__ == "__main__":
-    #generateEntries(50)
-    addEntry(["Sign of the Whale", "Junior"])
+def countFrequencies(entries):
+    clubFrequency = []
+    x = 0
+    while x < len(clubList):
+        clubFrequency.append(0)
+        x += 1
 
-    #Generating output graphics
-    clubFrequency = [0, 0, 0, 0, 0]
+    for entry in entries:
+        idx = clubList.index(entry["Club"])
+        clubFrequency[idx] = clubFrequency[idx] + 1
+    return clubFrequency
 
-    symbol = "ALL" # @param ["ALL", "Freshman", "Sophomore", "Junior", "Senior"]
-    if (symbol == "ALL"):
-        for entry in entries:
-            idx = clubList.index(entry["club"])
-            clubFrequency[idx] = clubFrequency[idx] + 1
-    else:
-        for entry in entries:
-            if (entry["year"] == symbol):
-                idx = clubList.index(entry["club"])
-                clubFrequency[idx] = clubFrequency[idx] + 1
+def returnClubs():
+    return clubList
 
-    fig = px.bar(x=clubList, y=clubFrequency, labels={"y": "Frequency", "x": "Club"})
-    #fig.show()
+def returnYears():
+    return yearList
