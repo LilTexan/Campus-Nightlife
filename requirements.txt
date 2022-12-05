@@ -11,3 +11,5 @@ pandas
 oauth2client
 
 flask
+
+pytest

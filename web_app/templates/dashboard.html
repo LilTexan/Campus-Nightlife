@@ -19,6 +19,8 @@
         var frequencies = '{{ frequencies }}'
         var clubList = '{{ clubList }}'
         var yearList = '{{ yearList }}'
+        console.log(clubList)
+        console.log(frequencies)
         //var stockData = JSON.parse('{{ data }}')
         //var stockData = '{{ data }}'
         //var data = JSON.parse('{{entries | tojson}}') // https://stackoverflow.com/a/45132694/670433
@@ -32,18 +34,16 @@
 
         // visualize the data
         // see: https://plotly.com/javascript/line-charts/
-        var chartData = [
+        var series =
           {
               x: clubList,
               y: frequencies,
               type: 'bar'
           }
-        ]
-        //var chartData = [series]
+        var chartData = [series]
         var layout = {
-            title: "Georgetown's Moves: " + symbol,
+            title: "Georgetown's Moves: ",
             height: 600
-            }
         }
         //Plotly.newPlot("chart-container", data, layout, {responsive: true})
         Plotly.newPlot("chart-container", chartData, layout)
