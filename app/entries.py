@@ -89,4 +89,5 @@ def returnClubs():
 def returnYears():
     return yearList
 
-if __name__ == "__main__":
+#Uncomment for terminal testing
+#if __name__ == "__main__":
