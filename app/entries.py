@@ -24,8 +24,8 @@ def generateEntries(length):
 
 def authorizeGoogleSheets():
     #CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "auth", "google-credentials.json")
-    CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__),"/../google-credentials.json")
-    print(os.path.dirname(__file__))
+    #CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__),"/../google-credentials.json")
+    CREDENTIALS_FILEPATH = "/etc/secrets/google-credentials.json"
 
     AUTH_SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets", #> Allows read/write access to the user's sheets and their properties.
