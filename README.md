@@ -2,6 +2,7 @@
 ## Web-Based Use
 Python-based web application that compiles and displays data on where Georgetown students are going out.
 Deployed using Render, the site can be found [here](https://georgetown-nightlife.onrender.com).
+NOTE: If the site buffers a bit when first loading the link, please wait! It takes the deployment server a minute to start up.
 
 ## Local Use
 ### Setting Up a Virtual Environment
